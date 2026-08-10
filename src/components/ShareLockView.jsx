@@ -1,4 +1,4 @@
-import { Check, Copy, Share2 } from "lucide-react";
+import { Check, Copy, Share2, SquareArrowOutUpRight } from "lucide-react";
 import { useState } from "react";
 
 export default function ShareLockView({ createdLink, onReset }) {
@@ -52,6 +52,13 @@ export default function ShareLockView({ createdLink, onReset }) {
               ) : (
                 <Copy size={18} />
               )}
+            </button>
+            <button
+              onClick={() => (window.location.href = createdLink)}
+              className="p-2 rounded-full hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+              title="Abrir candado"
+            >
+              <SquareArrowOutUpRight size={18} />
             </button>
           </div>
           <button
