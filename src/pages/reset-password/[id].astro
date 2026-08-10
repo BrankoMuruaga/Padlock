@@ -1,0 +1,20 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ResetPassword from "@/UI/ResetPassword";
+import { SecurityBackground } from "@/components/SecurityBackground";
+
+const { id } = Astro.params;
+
+if (!id) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title="Modificar Contraseña">
+  <SecurityBackground lockId={id} client:load />
+  <main
+    class="pointer-events-auto relative z-10 m-auto px-8 flex flex-col items-center justify-center min-h-screen"
+  >
+    <ResetPassword lockId={id} client:load />
+  </main>
+</Layout>

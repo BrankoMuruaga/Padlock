@@ -1,0 +1,30 @@
+---
+import { SecurityBackground } from "@/components/SecurityBackground";
+import Layout from "@/layouts/Layout.astro";
+import LockIsland from "@/UI/LockIsland.jsx";
+import { supabase } from "@/utils/supabase";
+
+const { id } = Astro.params;
+
+const { data } = await supabase
+  .from("locks")
+  .select("id")
+  .eq("id", id)
+  .single();
+
+if (!data) {
+  return Astro.redirect("/404");
+}
+
+if (!id) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title="Resolver Candado">
+  <SecurityBackground lockId={id} client:load />
+
+  <main class="relative z-10 pointer-events-none">
+    <LockIsland lockId={id} client:load />
+  </main>
+</Layout>

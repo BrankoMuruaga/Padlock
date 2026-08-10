@@ -1,0 +1,35 @@
+---
+import { SecurityBackground } from "@/components/SecurityBackground.jsx";
+import Layout from "@/layouts/Layout.astro";
+
+// Nota: Al ser un archivo .astro, no necesitamos client:load para iconos simples
+import { ShieldAlert } from "lucide-react";
+---
+
+<Layout title="Candado no encontrado - 404">
+  <SecurityBackground />
+
+  <main class="relative z-10 flex min-h-screen items-center justify-center p-4">
+    <div
+      class="flex w-full max-w-sm flex-col items-center rounded-2xl gap-4 bg-white/10 p-8 text-center backdrop-blur-md shadow-2xl"
+    >
+      <div class="animate-bounce">
+        <ShieldAlert size={64} strokeWidth={1.5} />
+      </div>
+
+      <h1 class="text-6xl font-bold">404</h1>
+      <h2 class="text-xl font-bold">Página no encontrada</h2>
+      <p class="text-sm">
+        El candado que estás buscando no existe, la combinación se ha perdido en
+        el tiempo o el enlace es incorrecto.
+      </p>
+
+      <a
+        href="/"
+        class="w-full rounded-lg bg-linear-to-b from-amber-400 to-amber-600 px-6 py-3 font-bold text-amber-950 shadow-[0_4px_12px_rgba(251,191,36,0.4)] transition-all hover:from-amber-300 hover:to-amber-500 active:scale-95"
+      >
+        Forjar nuevo candado
+      </a>
+    </div>
+  </main>
+</Layout>
