@@ -23,14 +23,14 @@ export default function LockIsland({ lockId }) {
   // Estados para la secuencia de fallo y victoria
   const [purgeProgress, setPurgeProgress] = useState(0);
   const [isBlackout, setIsBlackout] = useState(false);
-  const [startDoorTransition, setStartDoorTransition] = useState(false); // <- Nuevo estado para la puerta
+  const [showLoseText, setShowLoseText] = useState(false); // <- Nuevo estado para el texto de perder
+  const [startDoorTransition, setStartDoorTransition] = useState(false);
 
   // Efecto 1: Manejar la carga de la barra de progreso al fallar
   useEffect(() => {
     let interval;
     if (isLockedOut && !isBlackout) {
       setPurgeProgress(0);
-
       interval = setInterval(() => {
         setPurgeProgress((prev) => {
           if (prev >= 100) {
@@ -44,37 +44,60 @@ export default function LockIsland({ lockId }) {
     return () => clearInterval(interval);
   }, [isLockedOut, isBlackout]);
 
-  // Efecto 2: Pantalla negra y reinicio al llegar al 100% de la purga
+  // Efecto 2: Pantalla negra, YOU LOSE y reinicio al llegar al 100% de la purga
   useEffect(() => {
     if (purgeProgress === 100) {
       setIsBlackout(true);
 
-      setTimeout(() => {
-        setIsBlackout(false);
-        setPurgeProgress(0);
-        resetLock();
-      }, 3000);
+      // 1. Mostrar el "YOU LOSE" después de 1 segundo en negro
+      const textTimer = setTimeout(() => {
+        setShowLoseText(true);
+      }, 1000);
+
+      return () => {
+        clearTimeout(textTimer);
+      };
     }
-  }, [purgeProgress, resetLock]);
+  }, [purgeProgress]);
 
   // Efecto 3: Lógica de Victoria (2 segundos en negro, luego abre la puerta)
   useEffect(() => {
     if (isUnlocked) {
-      // 1. Inmediatamente ponemos la pantalla negra
       setIsBlackout(true);
-
-      // 2. Esperamos 2 segundos
       const timer = setTimeout(() => {
-        setIsBlackout(false); // Quitamos la pantalla negra básica
-        setStartDoorTransition(true); // Arrancamos el componente de la puerta (que también tiene fondo negro)
+        setIsBlackout(false);
+        setStartDoorTransition(true);
       }, 2000);
-
       return () => clearTimeout(timer);
     }
   }, [isUnlocked]);
 
-  // --- PANTALLA NEGRA ---
-  if (isBlackout) {
+  // --- PANTALLA NEGRA Y "YOU LOSE" ---
+  if (isBlackout && !isUnlocked) {
+    // Agregamos la condición !isUnlocked para que no pise los 2 segs negros de la victoria
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center">
+        <h1
+          className="text-6xl md:text-8xl font-black text-center drop-shadow-2xl"
+          style={{
+            color: "#ef4444", // Rojo Circo
+            WebkitTextStroke: "2px black",
+            textShadow: "6px 6px 0px #7f1d1d", // Sombra roja oscura
+            opacity: showLoseText ? 1 : 0,
+            transform: showLoseText
+              ? "translateY(0) scale(1)"
+              : "translateY(40px) scale(0.5)",
+            transition: "all 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
+          }}
+        >
+          YOU LOSE
+        </h1>
+      </div>
+    );
+  }
+
+  // --- PANTALLA NEGRA (Solo para la transición de victoria) ---
+  if (isBlackout && isUnlocked) {
     return (
       <div className="fixed inset-0 z-50 bg-black flex items-center justify-center" />
     );
@@ -87,7 +110,6 @@ export default function LockIsland({ lockId }) {
         <div className="relative z-30 drop-shadow-2xl scale-70 md:scale-100 mx-auto p-4 ">
           <PurgeAIPopup percentage={purgeProgress} />
         </div>
-
         <img
           src="/caine.webp"
           alt="Caine"
