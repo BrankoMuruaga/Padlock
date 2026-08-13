@@ -1,46 +1,53 @@
 import ArcoMetalico from "./ArcoMetalico";
 
-export function Padlock({ children, unlocked = false }) {
+export function Padlock({
+  children,
+  unlocked = false,
+  isShaking = false,
+  isLockedOut = false,
+}) {
   return (
-    <div className="relative flex flex-col items-center select-none">
-      {/* Halo de luz ambiental */}
+    <div className="relative flex flex-col items-center select-none group">
+      {/* Halo de luz: Rojo agresivo si se bloquea */}
       <div
-        className={`absolute top-28 w-72 h-72 rounded-full blur-3xl transition-colors duration-700 ${
-          unlocked ? "bg-emerald-400/30" : "bg-amber-400/20"
+        className={`absolute top-28 w-80 h-80 rounded-full blur-3xl transition-colors duration-700 ${
+          unlocked
+            ? "bg-circus-green"
+            : isLockedOut
+              ? "bg-red-600/80"
+              : "bg-circus-yellow/50"
         }`}
       />
 
-      {/* Arco metálico */}
       <ArcoMetalico unlocked={unlocked} />
 
-      {/* Cuerpo dorado */}
+      {/* Aplicamos las animaciones dependiendo del estado */}
       <div
-        className={`relative z-10 -mt-2 rounded-3xl p-6 pb-8 transition-colors duration-500
-          bg-linear-to-b ${
-            unlocked
-              ? "from-emerald-400 via-emerald-500 to-emerald-700"
-              : "from-amber-300 via-amber-500 to-amber-700"
-          }
-          shadow-[0_25px_50px_rgba(0,0,0,0.55),inset_0_2px_6px_rgba(255,255,255,0.5),inset_0_-8px_16px_rgba(0,0,0,0.3)]`}
+        className={`relative z-10 -mt-2 rounded-3xl p-6 pb-8 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+          border-[6px] border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]
+          bg-[repeating-linear-gradient(45deg,#ef4444,#ef4444_20px,#facc15_20px,#facc15_40px)]
+          ${unlocked ? "scale-105 rotate-3" : "scale-100"}
+          ${isShaking ? "animate-shake" : ""}
+          ${isLockedOut ? "animate-glitch border-red-500" : ""}
+        `}
       >
-        {/* Tornillos decorativos */}
+        {/* Tornillos */}
         {[
           "top-3 left-3",
           "top-3 right-3",
           "bottom-3 left-3",
           "bottom-3 right-3",
         ].map((pos) => (
-          <span
+          <div
             key={pos}
-            className={`absolute ${pos} w-2.5 h-2.5 rounded-full bg-black/40
-              shadow-[inset_0_1px_2px_rgba(0,0,0,0.8),0_1px_0_rgba(255,255,255,0.4)]`}
+            className={`absolute ${pos} w-4 h-4 rounded-full bg-blue-500 border-2 border-black
+              shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.4)]`}
           />
         ))}
 
-        {/* Brillo superior */}
-        <div className="absolute inset-x-4 top-1.5 h-6 rounded-full bg-white/30 blur-md pointer-events-none" />
-
-        {children}
+        <div className="relative bg-zinc-900 border-4 border-black rounded-xl p-2 shadow-[inset_0_4px_10px_rgba(0,0,0,0.8)]">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 ---
+import PurgeAIPopup from "@/components/PurgeAIPopup";
 import { SecurityBackground } from "@/components/SecurityBackground";
 import Layout from "@/layouts/Layout.astro";
 import CreateLockDashboard from "@/UI/CreateLockDashboard.jsx";
@@ -10,7 +11,7 @@ import CreateLockDashboard from "@/UI/CreateLockDashboard.jsx";
   <main
     class="relative z-10 min-h-screen flex items-center justify-center pointer-events-none p-4"
   >
-    <div class="pointer-events-auto w-fullw-screen">
+    <div class="pointer-events-auto w-full flex justify-center">
       <CreateLockDashboard client:load />
     </div>
   </main>

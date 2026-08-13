@@ -46,8 +46,8 @@ export default function CreateLockDashboard() {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-sm">
-      <div className="w-full rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md p-8 shadow-lg transition-all">
-        <h2 className="mb-6 flex justify-center items-center text-2xl font-bold tracking-wide ">
+      <div className="w-full rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md p-8 shadow-lg transition-all ">
+        <h2 className="mb-6 flex justify-center items-center text-2xl font-bold tracking-wide text-white ">
           {!createdLink ? "Forjar Candado" : "Candado Forjado"}
         </h2>
 
@@ -66,7 +66,7 @@ export default function CreateLockDashboard() {
       {user && (
         <button
           onClick={handleLogout}
-          className="top-5 right-10 absolute flex items-center justify-center gap-2 text-sm font-medium  hover:text-red-400 transition-colors cursor-pointer"
+          className="top-5 right-10 absolute flex items-center justify-center gap-2 text-sm font-medium text-white hover:text-red-400 transition-colors cursor-pointer"
         >
           <LogOut size={16} />
           Cerrar sesión

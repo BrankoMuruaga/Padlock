@@ -1,32 +1,38 @@
-export function ArcoMetalico({ unlocked }) {
+export default function ArcoMetalico({ unlocked }) {
   return (
     <svg
-      width="130"
-      height="95"
-      viewBox="0 0 130 95"
-      className={`relative z-10 transition-all duration-500 ease-out ${
-        unlocked
-          ? "-translate-y-7 -rotate-12 origin-bottom-right drop-shadow-[0_0_14px_rgba(52,211,153,0.6)]"
-          : "drop-shadow-[0_4px_6px_rgba(0,0,0,0.45)]"
+      width="200"
+      height="150"
+      viewBox="0 -15 150 115"
+      className={`relative z-10 translate-x-4 transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
+        unlocked ? "-translate-y-8 -rotate-12 origin-bottom-right" : ""
       }`}
     >
-      <defs>
-        <linearGradient id="shackleGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#64748b" />
-          <stop offset="45%" stopColor="#f1f5f9" />
-          <stop offset="60%" stopColor="#cbd5e1" />
-          <stop offset="100%" stopColor="#475569" />
-        </linearGradient>
-      </defs>
+      {/* Contorno negro grueso (dibujado detrás) */}
       <path
         d="M 24 95 L 24 48 A 41 41 0 0 1 106 48 L 106 95"
         fill="none"
-        stroke="url(#shackleGrad)"
-        strokeWidth="17"
+        stroke="#000000"
+        strokeWidth="24"
         strokeLinecap="round"
+      />
+      {/* Color principal del arco (Azul vibrante) */}
+      <path
+        d="M 24 95 L 24 48 A 41 41 0 0 1 106 48 L 106 95"
+        fill="none"
+        stroke="#3b82f6"
+        strokeWidth="14"
+        strokeLinecap="round"
+      />
+      {/* Brillo estilo plástico CGI antiguo */}
+      <path
+        d="M 24 85 L 24 48 A 37 37 0 0 1 102 48"
+        fill="none"
+        stroke="#93c5fd"
+        strokeWidth="4"
+        strokeLinecap="round"
+        className="opacity-80"
       />
     </svg>
   );
 }
-
-export default ArcoMetalico;

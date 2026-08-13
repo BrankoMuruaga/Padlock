@@ -24,6 +24,19 @@ export function SecurityBackground({ lockId = "" }) {
   const patternItems = Array.from({ length: 50 });
 
   return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      aria-hidden="true"
+      className="absolute inset-0 z-0 w-full h-full object-cover object-center pointer-events-none md:scale-110"
+    >
+      <source src="/lock-bg.mp4" type="video/mp4" />
+    </video>
+  );
+
+  return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none flex flex-wrap justify-center items-center gap-12 p-8">
       {patternItems.map((_, index) => {
         const IconComponent = ICONS[index % ICONS.length];

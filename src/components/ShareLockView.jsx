@@ -26,17 +26,19 @@ export default function ShareLockView({ createdLink, onReset }) {
         <Check size={32} strokeWidth={3} />
       </div>
 
-      <p className="text-center font-medium">¡Tu candado está listo!</p>
+      <p className="text-center font-medium text-white">
+        ¡Tu candado está listo!
+      </p>
 
       <div className="flex flex-col gap-3">
         {/* Contenedor del enlace con botón de copiar integrado */}
         <div className="flex gap-2 w-full">
-          <div className="relative flex items-center  border border-slate-600 rounded-lg overflow-hidden p-1">
+          <div className="relative flex items-center  border border-slate-200 rounded-lg overflow-hidden p-1">
             <input
               type="text"
               readOnly
               value={createdLink}
-              className="w-full bg-transparent  font-mono text-sm px-3 focus:outline-none"
+              className="w-full bg-transparent text-white font-mono text-sm px-3 focus:outline-none"
             />
             <button
               onClick={() => {
@@ -44,7 +46,7 @@ export default function ShareLockView({ createdLink, onReset }) {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               }}
-              className="p-2 rounded-full hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+              className="p-2 rounded-full text-white hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
               title="Copiar enlace"
             >
               {copied ? (
@@ -54,25 +56,25 @@ export default function ShareLockView({ createdLink, onReset }) {
               )}
             </button>
             <button
-              onClick={() => (window.location.href = createdLink)}
-              className="p-2 rounded-full hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
-              title="Abrir candado"
+              onClick={shareNative}
+              className="p-2  rounded-full text-white hover:bg-slate-200 flex items-center justify-center gap-2 py-2.5   transition-colors cursor-pointer"
             >
-              <SquareArrowOutUpRight size={18} />
+              <Share2 size={18} />
             </button>
           </div>
           <button
-            onClick={shareNative}
-            className="p-2 size-10 rounded-full hover:bg-slate-200 flex items-center justify-center gap-2 py-2.5   transition-colors cursor-pointer"
+            onClick={() => (window.location.href = createdLink)}
+            className="p-2 size-10 rounded-full text-white hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+            title="Abrir candado"
           >
-            <Share2 size={24} />
+            <SquareArrowOutUpRight size={24} />
           </button>
         </div>
       </div>
 
       <button
         onClick={onReset}
-        className="mt-2 text-sm  transition-colors cursor-pointer underline underline-offset-4"
+        className="mt-2 text-sm  transition-colors cursor-pointer underline underline-offset-4 text-white"
       >
         Forjar otro candado
       </button>

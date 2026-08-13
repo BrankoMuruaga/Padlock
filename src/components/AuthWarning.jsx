@@ -17,7 +17,7 @@ export default function AuthWarning() {
 
   return (
     <div className="w-full rounded-2xl p-5 shadow-lg backdrop-blur-md transition-all flex flex-col gap-4">
-      <p className="leading-relaxed text-sm text-center">
+      <p className="leading-relaxed text-sm text-center text-white">
         Al no tener una cuenta, tus candados son temporales y se destruirán tras
         24 horas.
       </p>
@@ -25,7 +25,7 @@ export default function AuthWarning() {
       <button
         type="button"
         onClick={handleGoogleLogin}
-        className="flex w-full items-center justify-center gap-3 rounded-xl bg-white/10 hover:bg-white/20  px-4 py-3 text-sm font-bold border border-black transition-all cursor-pointer active:scale-95"
+        className="flex w-full items-center justify-center gap-3 rounded-xl text-white bg-white/10 hover:bg-white/20  px-4 py-3 text-sm font-bold border border-white transition-all cursor-pointer active:scale-95"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24">
           <path

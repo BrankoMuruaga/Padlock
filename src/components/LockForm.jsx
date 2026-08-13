@@ -41,7 +41,7 @@ export default function LockForm({ setCreatedLink, user }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <p className="text-sm mb-4 text-center ">
+      <p className="text-sm mb-4 text-center text-white">
         Ingresa una combinación de 4 dígitos para tu candado secreto.
       </p>
 
@@ -50,7 +50,7 @@ export default function LockForm({ setCreatedLink, user }) {
         maxLength={4}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full rounded-xl border-2 border-slate-600  px-4 py-4 text-center font-mono text-2xl uppercase tracking-[0.5em]  focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 focus:outline-none placeholder-slate-500 transition-all"
+        className="w-full rounded-xl border-2 border-slate-200 text-white px-4 py-4 text-center font-mono text-2xl uppercase tracking-[0.5em]  focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 focus:outline-none placeholder-slate-300 transition-all"
         placeholder="A1B2"
         disabled={isLoading}
       />
@@ -58,7 +58,7 @@ export default function LockForm({ setCreatedLink, user }) {
       <button
         type="submit"
         disabled={isLoading || input.length !== 4}
-        className="mt-2 rounded-xl bg-linear-to-b from-amber-400 to-amber-600 px-6 py-3 font-bold text-amber-950 shadow-[0_4px_12px_rgba(251,191,36,0.4)] hover:from-amber-300 hover:to-amber-500 active:scale-95 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-2 rounded-xl bg-circus-red px-6 py-3 font-bold text-white shadow-[0_4px_12px_rgba(251,191,36,0.4)] hover:from-amber-300 hover:to-amber-500 active:scale-95 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? "Forjando..." : "Crear Candado"}
       </button>

@@ -1,8 +1,80 @@
 @import "tailwindcss";
 
+@theme {
+  /* Fuentes Tipográficas */
+  --font-sans: "Fredoka", sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  /* Paleta de Colores: The Amazing Digital Circus */
+  --color-circus-red: #ef4444; /* Rojo Caine/Pomni */
+  --color-circus-yellow: #facc15; /* Amarillo Circo */
+  --color-circus-blue: #3b82f6; /* Azul Pomni */
+  --color-circus-purple: #7e22ce; /* Morado Jax */
+  --color-circus-void: #581c87; /* Fondo oscuro del Sótano */
+  --color-circus-green: #4ade80; /* Verde Consola/Glitch */
+
+  /* Nuevas Animaciones Digital Circus */
+  --animate-shake: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-glitch: glitch 0.2s linear infinite;
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-4px, 4px) skewX(20deg) opacity(0.8);
+    }
+    40% {
+      transform: translate(-4px, -4px);
+    }
+    60% {
+      transform: translate(4px, 4px) skewX(-20deg) filter(hue-rotate(90deg));
+    }
+    80% {
+      transform: translate(4px, -4px) opacity(0.9);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  --animate-swing: swing 0.4s steps(2, jump-none) infinite alternate;
+
+  @keyframes swing {
+    0% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(10deg);
+    }
+  }
+}
+
 html,
 body {
   margin: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background-color: var(--color-circus-void);
 }
